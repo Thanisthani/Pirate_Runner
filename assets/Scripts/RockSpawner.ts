@@ -54,6 +54,10 @@ export class RockSpanwer extends Component {
         })
         .start();
 }
+
+    reset(){
+        this.node.removeAllChildren()
+    }
 }
 
 
