@@ -1,4 +1,4 @@
-import { _decorator, Animation, CCInteger, Collider2D, Component, Contact2DType, director, find, IPhysics2DContact, Node, screen, Vec3 } from 'cc';
+import { _decorator, Animation, CCInteger, Collider2D, Component, Contact2DType, director, EventTouch, find, IPhysics2DContact, Node, screen, Vec3 } from 'cc';
 import { GameCtrl } from './GameCtrl';
 import { Results } from './Results';
 const { ccclass, property } = _decorator;
@@ -22,13 +22,66 @@ export class Oracle extends Component {
    public isContactFloorDown: boolean = false
    public scene = screen.windowSize
    public horizontalPosition
+   private _touching = false;
+
+   public isOver:boolean = false
 
    onLoad(){
     this.gameCtrl = find("GameCtrl").getComponent(GameCtrl)
     this.oracleAnimation = this.node.getComponent(Animation)
     let initialPosition = this.node.getPosition()
     this.horizontalPosition = initialPosition.x
+    this.node.on(Node.EventType.TOUCH_START, this.onTouchStart, this);
+    this.node.on(Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+    this.node.on(Node.EventType.TOUCH_END, this.onTouchEnd, this);
+    this.node.on(Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
    }
+
+
+   onTouchStart(event: EventTouch) {
+    this._touching = true;
+    if(this.isOver){
+        this.gameCtrl.resetGame()
+        this.isOver = false
+    }
+}
+
+// onTouchMove(event: EventTouch) {
+//     if (!this._touching) return;
+
+//     const delta = event.getDelta(); // returns movement delta since last frame
+
+//     // Only move vertically
+//     const currentPos = this.node.getPosition();
+//     this.node.setPosition(currentPos.x, currentPos.y + delta.y, currentPos.z);
+// }
+onTouchMove(event: EventTouch) {
+    if (!this._touching) return;
+
+    const delta = event.getDelta();
+    const currentPos = this.node.getPosition();
+
+    // ✅ Set your desired Y limits (based on barrier positions)
+    const minY = -180;  // bottom barrier Y
+    const maxY = 140;   // top barrier Y
+
+    let newY = currentPos.y + delta.y;
+    newY = Math.max(minY, Math.min(maxY, newY));  // clamp within bounds
+
+    this.node.setPosition(currentPos.x, newY, currentPos.z);
+}
+
+onTouchEnd(event: EventTouch) {
+    this._touching = false;
+}
+
+onDestroy() {
+    this.node.off(Node.EventType.TOUCH_START, this.onTouchStart, this);
+    this.node.off(Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+    this.node.off(Node.EventType.TOUCH_END, this.onTouchEnd, this);
+    this.node.off(Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+}
+
 
    moveUp() {
     if(this.isContactFloorDown){
@@ -71,6 +124,7 @@ export class Oracle extends Component {
         this.isContactFloorDown = true
     }
     else{
+        this.isOver = true
         this.results.showScore()
         this.gameCtrl.gameOver()
     }

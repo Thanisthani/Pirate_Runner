@@ -2,6 +2,7 @@ import { _decorator, CCInteger, Component, director, EventKeyboard, Input, input
 import { Oracle } from './Oracle';
 import { RockSpanwer } from './RockSpawner';
 import { Results } from './Results';
+import { OracleAudio } from './OracleAudio';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameCtrl')
@@ -18,8 +19,12 @@ export class GameCtrl extends Component {
    @property({type:Results})
    public results: Results
 
+   @property({type:OracleAudio})
+   public oracleAudio: OracleAudio
+
    onLoad(){
-      this.initListener()
+      // this.initListener()
+      this.oracleAudio.onAudioQueue(0)
    }
 
    initListener(){
@@ -56,25 +61,23 @@ export class GameCtrl extends Component {
    }
 
    gameOver(){
+      this.oracleAudio.onAudioQueue(1)
       this.oracle.oracleAnimation.play("Oracle_falling");  
       this.scheduleOnce(() => {
          director.pause();
       }, 0.5);
    }
 
+   gameWin(){
+
+      director.loadScene("Play")
+    
+   }
    resetGame(){
       this.rockSpawner.reset()
       this.startGame()
       this.results.resetScore()
    }
-
-
-
-
-
-
-
-
 
 }
 

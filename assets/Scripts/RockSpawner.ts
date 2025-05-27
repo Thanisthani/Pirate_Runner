@@ -1,4 +1,4 @@
-import { _decorator, CCInteger, Component, find, instantiate, Node, Prefab, screen, tween, v2, Vec3 } from 'cc';
+import { _decorator, CCFloat, CCInteger, Component, find, instantiate, Node, Prefab, screen, tween, v2, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('RockSpanwer')
@@ -6,11 +6,11 @@ export class RockSpanwer extends Component {
     @property([Prefab])
     rockPrefabs: Prefab[] = [];
 
-    @property({type:CCInteger, tooltip:"Spawn interval"})
+    @property({type:CCFloat, tooltip:"Spawn interval"})
     public spawnInterval: number = 2
 
    public minY: number = -180
-   public maxY: number = 80
+   public maxY: number = 70
    public scene = screen.windowSize
    public game;
    public gameSpeed:number 
@@ -36,7 +36,7 @@ export class RockSpanwer extends Component {
    let rock = instantiate(rockPrefab);
 
     // Set start X (off-screen to the right)
-    const startX = this.scene.width /2+100
+    const startX = this.scene.width /2+200
 
     // Random Y position between minY and maxY
     const randomY = this.minY + Math.random() * (this.maxY - this.minY);
@@ -48,7 +48,7 @@ export class RockSpanwer extends Component {
     const duration = distance / this.gameSpeed;
 
     tween(rock)
-        .to(duration, { position: new Vec3(-this.scene.width+100 , randomY, 0) })
+        .to(duration, { position: new Vec3(-this.scene.width+200 , randomY, 0) })
         .call(() => {
             rock.destroy();
         })

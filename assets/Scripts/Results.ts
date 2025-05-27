@@ -1,4 +1,5 @@
-import { _decorator, Component, Label, Node } from 'cc';
+import { _decorator, Component, director, find, Label, Node } from 'cc';
+import { GameCtrl } from './GameCtrl';
 const { ccclass, property } = _decorator;
 
 @ccclass('Results')
@@ -18,33 +19,41 @@ export class Results extends Component {
     public maxScore: number = 0
     public score: number =0
     public isOver: boolean = false
+    private totalTime: number = 0; 
+    public gameCtrl
 
     onLoad(){
+        this.gameCtrl = find("GameCtrl").getComponent(GameCtrl)
         this.hideResults()
         this.currentScore.node.active = true
-        console.log("Results loaded")
     }
    
 
     update(deltaTime: number) {
         if(!this.isOver){
-        this.score += 0.01
-        this.currentScore.string = "Score: " + this.score.toFixed(0)
+        this.totalTime += deltaTime;
+        const minutes = Math.floor(this.totalTime/ 60);
+        const seconds = Math.floor(this.totalTime % 60);
+
+        const mm = minutes < 10 ? '0' + minutes : minutes.toString();
+        const ss = seconds < 10 ? '0' + seconds : seconds.toString();
+        this.currentScore.string = " Time: " + mm + ":" + ss
+        if(this.totalTime > 10){
+            director.loadScene("PlayNext")
         }
     }
+}
 
     resetScore(){
         this.score = 0
+        this.totalTime = 0
         this.isOver = false 
         this.hideResults()
     }
     showScore(){
         this.isOver = true
-        this.maxScore = Math.max(this.maxScore,this.score)
-        this.yourScore.string = "Your Score: " + this.score.toFixed(0)
-        this.highScore.string = "High Score: " + this.maxScore.toFixed(0)
+        this.yourScore.string = this.totalTime > 60 ? "You win" : "Game Over"
         this.yourScore.node.active = true
-        this.highScore.node.active = true
         this.tryAgain.node.active = true
     }
 
