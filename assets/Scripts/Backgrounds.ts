@@ -48,13 +48,13 @@ update(deltaTime: number) {
     this.bgLocation2.x -= this.gameCtrlSpeed.gameSpeed * deltaTime;
     this.bgLocation3.x -= this.gameCtrlSpeed.gameSpeed * deltaTime;
 
-    if (this.bgLocation1.x <= 0-this.bgWidth1*0.35) {
+    if (this.bgLocation1.x <= 0-this.bgWidth1*0.4) {
         this.bgLocation1.x = this.bgLocation3.x + this.bgWidth3*0.35;
     }
-    if (this.bgLocation2.x <= 0-this.bgWidth2*0.35) {
+    if (this.bgLocation2.x <= 0-this.bgWidth2*0.4) {
         this.bgLocation2.x = this.bgLocation1.x + this.bgWidth1*0.35;
     }
-    if (this.bgLocation3.x <= 0-this.bgWidth3*0.35) {
+    if (this.bgLocation3.x <= 0-this.bgWidth3*0.4) {
         this.bgLocation3.x = this.bgLocation2.x + this.bgWidth2*0.35;
     }
 

@@ -36,7 +36,7 @@ export class RockSpanwer extends Component {
    let rock = instantiate(rockPrefab);
 
     // Set start X (off-screen to the right)
-    const startX = this.scene.width /2+200
+    const startX = this.scene.width /2+250
 
     // Random Y position between minY and maxY
     const randomY = this.minY + Math.random() * (this.maxY - this.minY);
@@ -48,7 +48,7 @@ export class RockSpanwer extends Component {
     const duration = distance / this.gameSpeed;
 
     tween(rock)
-        .to(duration, { position: new Vec3(-this.scene.width+200 , randomY, 0) })
+        .to(duration, { position: new Vec3(-this.scene.width+250 , randomY, 0) })
         .call(() => {
             rock.destroy();
         })

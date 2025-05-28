@@ -71,7 +71,7 @@ export class CP_Results extends Component {
 
    showResults(){
     this.isOver = true
-    this.finalScore.string = this.score +" / "+ this.gameCtrl.totalPoints*0.6
+    this.finalScore.string = this.score +" / "+ (this.gameCtrl.totalPoints*0.6).toFixed(0)
     this.finalScore.node.active = true
     this.tryAgain.node.active = true
     this.loss.node.active = true

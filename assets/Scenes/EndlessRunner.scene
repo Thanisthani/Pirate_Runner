@@ -456,8 +456,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 35.52999999999997,
-      "y": -31.449500000000057,
+      "x": 29.583,
+      "y": -31.45,
       "z": 0
     },
     "_lrot": {
@@ -565,8 +565,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 1369.749,
-      "y": -31.4495,
+      "x": 1366.028,
+      "y": -31.449,
       "z": 0
     },
     "_lrot": {
@@ -1255,7 +1255,7 @@
         "__expectedType__": "cc.Prefab"
       }
     ],
-    "spawnInterval": 1.5,
+    "spawnInterval": 2,
     "_id": "bedx5yg+tK/pMu57oVz/yM"
   },
   {
