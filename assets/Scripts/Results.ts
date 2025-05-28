@@ -38,7 +38,7 @@ export class Results extends Component {
         const mm = minutes < 10 ? '0' + minutes : minutes.toString();
         const ss = seconds < 10 ? '0' + seconds : seconds.toString();
         this.currentScore.string = " Time: " + mm + ":" + ss
-        if(this.totalTime > 10){
+        if(this.totalTime > 60){
             director.loadScene("PlayNext")
         }
     }

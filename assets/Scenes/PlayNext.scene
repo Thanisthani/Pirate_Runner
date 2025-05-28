@@ -435,8 +435,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 88.46702708204094,
-      "height": 50.400000000000006
+      "width": 176.9341268610422,
+      "height": 75.6
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -468,10 +468,10 @@
     "_string": "You won",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 37.78125,
-    "_fontSize": 30,
+    "_actualFontSize": 75.5625,
+    "_fontSize": 60,
     "_fontFamily": "Arial",
-    "_lineHeight": 40,
+    "_lineHeight": 60,
     "_overflow": 0,
     "_enableWrapText": true,
     "_font": {

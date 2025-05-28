@@ -22,9 +22,15 @@ export class GameCtrl extends Component {
    @property({type:OracleAudio})
    public oracleAudio: OracleAudio
 
+   public isOver: boolean = false
+
    onLoad(){
       // this.initListener()
       this.oracleAudio.onAudioQueue(0)
+      this.node.on(Node.EventType.TOUCH_START, ()=>{
+         if(this.isOver){
+            this.resetGame()}
+      }, this);
    }
 
    initListener(){
@@ -52,8 +58,6 @@ export class GameCtrl extends Component {
       }
   }
 
-
-
    startGame(){
     director.resume()
     this.oracle.resetOracle()
@@ -61,7 +65,8 @@ export class GameCtrl extends Component {
    }
 
    gameOver(){
-      this.oracleAudio.onAudioQueue(1)
+      this.isOver = true
+      this.oracleAudio.onAudioQueue(1) 
       this.oracle.oracleAnimation.play("Oracle_falling");  
       this.scheduleOnce(() => {
          director.pause();
@@ -74,6 +79,7 @@ export class GameCtrl extends Component {
     
    }
    resetGame(){
+      this.isOver = false
       this.rockSpawner.reset()
       this.startGame()
       this.results.resetScore()

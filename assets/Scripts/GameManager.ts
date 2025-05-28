@@ -8,8 +8,7 @@ export class GameManager extends Component {
     public currentLevel: number = 0;
     public levelConfig = [
         { sceneName: "EndlessRunner", type: "runner" },
-        { sceneName: "CollectPoints", type: "jumper" },
-        { sceneName: "PuzzleScene", type: "puzzle" },
+        { sceneName: "CollectPoints", type: "jumper" }
     ];
 
     onLoad() {
@@ -35,7 +34,8 @@ export class GameManager extends Component {
             this.currentLevel++;
             this.loadCurrentLevelScene();
         } else {
-            director.loadScene("Play");
+            this.currentLevel = 0
+            this.loadCurrentLevelScene()
         }
     }
 

@@ -40,10 +40,7 @@ export class Oracle extends Component {
 
    onTouchStart(event: EventTouch) {
     this._touching = true;
-    if(this.isOver){
-        this.gameCtrl.resetGame()
-        this.isOver = false
-    }
+    
 }
 
 // onTouchMove(event: EventTouch) {
