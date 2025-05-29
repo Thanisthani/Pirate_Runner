@@ -50,6 +50,7 @@ export class CP_GameCtrl extends Component {
         this.isOver = false
         this.coinSpawner.resetCoin()
         this.results.resetScore()
+        this.totalPoints = 0
         director.resume()
      }
 

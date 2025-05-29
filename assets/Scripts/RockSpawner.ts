@@ -10,12 +10,17 @@ export class RockSpanwer extends Component {
     public spawnInterval: number = 2
 
    public minY: number = -180
-   public maxY: number = 70
+   public maxY: number = 40
    public scene = screen.windowSize
    public game;
    public gameSpeed:number 
 
    private timer: number = 0;
+
+   onLoad(){
+    this.game = find("GameCtrl").getComponent("GameCtrl")
+    this.gameSpeed = this.game.gameSpeed
+}
 
    update(deltaTime: number) {
     this.timer += deltaTime;
@@ -27,8 +32,6 @@ export class RockSpanwer extends Component {
 }
 
    spawnRock() {
-    this.game = find("GameCtrl").getComponent("GameCtrl")
-    this.gameSpeed = this.game.gameSpeed
     // Randomly choose one rock prefab
     const prefabIndex = Math.floor(Math.random() * this.rockPrefabs.length);
     const rockPrefab = this.rockPrefabs[prefabIndex];
@@ -36,7 +39,7 @@ export class RockSpanwer extends Component {
    let rock = instantiate(rockPrefab);
 
     // Set start X (off-screen to the right)
-    const startX = this.scene.width /2+250
+    const startX = this.scene.width /2+200
 
     // Random Y position between minY and maxY
     const randomY = this.minY + Math.random() * (this.maxY - this.minY);
@@ -48,7 +51,7 @@ export class RockSpanwer extends Component {
     const duration = distance / this.gameSpeed;
 
     tween(rock)
-        .to(duration, { position: new Vec3(-this.scene.width+250 , randomY, 0) })
+        .to(duration, { position: new Vec3(-this.scene.width+200 , randomY, 0) })
         .call(() => {
             rock.destroy();
         })

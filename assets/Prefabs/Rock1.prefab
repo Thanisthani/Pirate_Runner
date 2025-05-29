@@ -116,7 +116,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "0be49be0-16e4-4afe-ac86-ddb2a8b549b0@f9941",
+      "__uuid__": "398910a7-ea6b-47e8-a882-5b8c8b7dd6a5@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -152,19 +152,19 @@
     },
     "tag": 0,
     "_group": 1,
-    "_density": 15.5,
+    "_density": 0,
     "_sensor": false,
     "_friction": 0.2,
     "_restitution": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 5.8,
-      "y": 0
+      "x": -0.2,
+      "y": 7.5
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 86.1,
-      "height": 112.7
+      "width": 77.9,
+      "height": 72.8
     },
     "_id": ""
   },
@@ -185,10 +185,10 @@
       "__id__": 9
     },
     "enabledContactListener": false,
-    "bullet": false,
+    "bullet": true,
     "awakeOnLoad": true,
     "_group": 1,
-    "_type": 2,
+    "_type": 1,
     "_allowSleep": true,
     "_gravityScale": 0,
     "_linearDamping": 0,

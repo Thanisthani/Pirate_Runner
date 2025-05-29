@@ -3,7 +3,7 @@
   "custom_joint_texture_layouts": [],
   "general": {
     "designResolution": {
-      "fitWidth": false,
+      "fitWidth": true,
       "fitHeight": true
     }
   }

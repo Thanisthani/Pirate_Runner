@@ -2001,7 +2001,7 @@
     "_enabled": true,
     "__prefab": null,
     "_clip": null,
-    "_loop": false,
+    "_loop": true,
     "_playOnAwake": true,
     "_volume": 1,
     "_id": "b5afUfOS1BnqjQm3AUP/br"

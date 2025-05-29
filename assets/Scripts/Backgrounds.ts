@@ -27,6 +27,7 @@ export class Backgrounds extends Component {
 
 onLoad() {
     this.startUp();
+    console.log("StartUp");
 }
 
 startUp() {
@@ -35,12 +36,13 @@ startUp() {
     this.bgWidth3 = this.bg3.getComponent(UITransform).contentSize.width;
 
     this.bgLocation1.set(0, 0, 0);
-    this.bgLocation2.set(this.bgWidth1 *0.35, 0, 0);
-    this.bgLocation3.set(this.bgWidth1 * 2 *0.35, 0, 0);
+    this.bgLocation2.set(this.bgWidth1, 0, 0);
+    this.bgLocation3.set(this.bgWidth1 + this.bgWidth2, 0, 0);
 
     this.bg1.setPosition(this.bgLocation1);
     this.bg2.setPosition(this.bgLocation2);
     this.bg3.setPosition(this.bgLocation3);
+    
 }
 
 update(deltaTime: number) {
@@ -48,14 +50,14 @@ update(deltaTime: number) {
     this.bgLocation2.x -= this.gameCtrlSpeed.gameSpeed * deltaTime;
     this.bgLocation3.x -= this.gameCtrlSpeed.gameSpeed * deltaTime;
 
-    if (this.bgLocation1.x <= 0-this.bgWidth1*0.4) {
-        this.bgLocation1.x = this.bgLocation3.x + this.bgWidth3*0.35;
+    if (this.bgLocation1.x <= 0-this.bgWidth1-200) {
+        this.bgLocation1.x = this.bgLocation3.x + this.bgWidth3;
     }
-    if (this.bgLocation2.x <= 0-this.bgWidth2*0.4) {
-        this.bgLocation2.x = this.bgLocation1.x + this.bgWidth1*0.35;
+    if (this.bgLocation2.x <= 0-this.bgWidth2-200) {
+        this.bgLocation2.x = this.bgLocation1.x + this.bgWidth1;
     }
-    if (this.bgLocation3.x <= 0-this.bgWidth3*0.4) {
-        this.bgLocation3.x = this.bgLocation2.x + this.bgWidth2*0.35;
+    if (this.bgLocation3.x <= 0-this.bgWidth3-200) {
+        this.bgLocation3.x = this.bgLocation2.x + this.bgWidth2;
     }
 
     this.bg1.setPosition(this.bgLocation1);

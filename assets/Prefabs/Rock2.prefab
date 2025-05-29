@@ -38,8 +38,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 11.74,
+      "y": 63.986,
       "z": 0
     },
     "_lrot": {
@@ -79,8 +79,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 58,
-      "height": 57
+      "width": 70.80416666666669,
+      "height": 60.973944652908095
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -116,12 +116,12 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "ed4b557a-c47d-4c64-974e-771a11dd422c@f9941",
+      "__uuid__": "86f2705b-8974-48a7-ab1b-b4fa23577016@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -152,19 +152,19 @@
     },
     "tag": 0,
     "_group": 1,
-    "_density": 21,
+    "_density": 0,
     "_sensor": false,
     "_friction": 0.2,
     "_restitution": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 2.6,
-      "y": 0.9
+      "x": -1.7,
+      "y": -0.2
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 53.8,
-      "height": 55.2
+      "width": 54.8,
+      "height": 49.1
     },
     "_id": ""
   },
@@ -185,10 +185,10 @@
       "__id__": 9
     },
     "enabledContactListener": true,
-    "bullet": false,
+    "bullet": true,
     "awakeOnLoad": true,
     "_group": 1,
-    "_type": 2,
+    "_type": 1,
     "_allowSleep": true,
     "_gravityScale": 0,
     "_linearDamping": 0,

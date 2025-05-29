@@ -11,12 +11,21 @@ export class OracleAudio extends Component {
 
   onAudioQueue(index: number){
     let clip = this.audioClips[index]
-    if(clip){
-      this.audioSource.playOneShot(clip)
+
+    if(index == 0){
+  this.audioSource.clip = clip;
+      this.audioSource.loop = true;
+      this.audioSource.play();
+    }else{
+
+      if(clip){
+        this.audioSource.playOneShot(clip)
+      }
+      else{
+        console.error("Audio clip not found")
+      }
     }
-    else{
-      console.error("Audio clip not found")
-    }
+   
   }
 
 }
