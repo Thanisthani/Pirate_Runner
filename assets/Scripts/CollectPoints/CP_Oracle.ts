@@ -51,9 +51,7 @@ export class CP_Oracle extends Component {
         if(!this.gameCtrl.isOver) {
             this.holdStartTime = performance.now();
         }
-        else{
-            this.gameCtrl.resetGame()
-        }
+        
        
     }
 

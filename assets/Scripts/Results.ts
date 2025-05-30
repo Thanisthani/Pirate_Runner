@@ -1,4 +1,4 @@
-import { _decorator, Component, director, find, Label, Node } from 'cc';
+import { _decorator, Button, Component, director, find, Label, Node } from 'cc';
 import { GameCtrl } from './GameCtrl';
 const { ccclass, property } = _decorator;
 
@@ -13,8 +13,10 @@ export class Results extends Component {
     @property({type:Label})
     public highScore: Label
 
-    @property({type:Label})
-    public tryAgain: Label
+
+    @property({type: Button})
+    play: Button = null
+ 
 
     public maxScore: number = 0
     public score: number =0
@@ -26,6 +28,9 @@ export class Results extends Component {
         this.gameCtrl = find("GameCtrl").getComponent(GameCtrl)
         this.hideResults()
         this.currentScore.node.active = true
+        this.play.node.on(Button.EventType.CLICK,()=>{
+           this.gameCtrl.resetGame()
+        })
     }
    
 
@@ -54,7 +59,7 @@ export class Results extends Component {
         this.isOver = true
         this.yourScore.string = this.totalTime > 60 ? "You win" : "Game Over"
         this.yourScore.node.active = true
-        this.tryAgain.node.active = true
+        this.play.node.active = true
     }
 
   
@@ -62,7 +67,7 @@ export class Results extends Component {
     hideResults(){
         this.yourScore.node.active = false
         this.highScore.node.active = false
-        this.tryAgain.node.active = false
+        this.play.node.active = false
     }
 }
 

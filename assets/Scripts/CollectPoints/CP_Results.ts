@@ -1,4 +1,4 @@
-import { _decorator, Component, director, find, Label } from 'cc';
+import { _decorator, Button, Component, director, find, Label } from 'cc';
 import { CP_GameCtrl } from './CP_GameCtrl';
 const { ccclass, property } = _decorator;
 
@@ -13,11 +13,12 @@ export class CP_Results extends Component {
    @property({type:Label})
    private finalScore: Label
 
-   @property({type:Label})
-   private tryAgain: Label
 
    @property({type:Label})
    private loss: Label
+
+   @property({type: Button})
+   play: Button = null
 
    public score: number =0
    public totalTime: number =0
@@ -28,6 +29,9 @@ export class CP_Results extends Component {
    onLoad(){
     this.hideResults()
     this.gameCtrl = find("GameCtrl").getComponent(CP_GameCtrl)
+    this.play.node.on(Button.EventType.CLICK,()=>{
+        this.gameCtrl.resetGame()
+     })
    }
 
    update(deltaTime: number){
@@ -73,7 +77,7 @@ export class CP_Results extends Component {
     this.isOver = true
     this.finalScore.string = this.score +" / "+ (this.gameCtrl.totalPoints*0.6).toFixed(0)
     this.finalScore.node.active = true
-    this.tryAgain.node.active = true
+    this.play.node.active = true
     this.loss.node.active = true
     this.currentScore.node.active = false
     this.timeLabel.node.active = false
@@ -81,7 +85,7 @@ export class CP_Results extends Component {
 
    hideResults(){
     this.finalScore.node.active = false
-    this.tryAgain.node.active = false
+    this.play.node.active = false
     this.loss.node.active = false
     this.timeLabel.node.active = true
     this.currentScore.node.active = true

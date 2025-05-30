@@ -27,10 +27,10 @@ export class GameCtrl extends Component {
    onLoad(){
       // this.initListener()
       this.oracleAudio.onAudioQueue(0)
-      this.node.on(Node.EventType.TOUCH_START, ()=>{
-         if(this.isOver){
-            this.resetGame()}
-      }, this);
+      // this.node.on(Node.EventType.TOUCH_START, ()=>{
+      //    if(this.isOver){
+      //       this.resetGame()}
+      // }, this);
    }
 
    initListener(){

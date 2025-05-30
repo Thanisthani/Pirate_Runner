@@ -1,10 +1,12 @@
-import { _decorator, CCFloat, CCInteger, Component, find, instantiate, Node, Prefab, screen, tween, v2, Vec3 } from 'cc';
+import { _decorator, CCFloat, Component, find, instantiate, Node, Prefab, screen, tween,  Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('RockSpanwer')
 export class RockSpanwer extends Component {
     @property([Prefab])
     rockPrefabs: Prefab[] = [];
+
+    public children: Node[] = [];
 
     @property({type:CCFloat, tooltip:"Spawn interval"})
     public spawnInterval: number = 2
@@ -14,12 +16,15 @@ export class RockSpanwer extends Component {
    public scene = screen.windowSize
    public game;
    public gameSpeed:number 
+   public gameWorld
 
    private timer: number = 0;
 
    onLoad(){
     this.game = find("GameCtrl").getComponent("GameCtrl")
     this.gameSpeed = this.game.gameSpeed
+
+
 }
 
    update(deltaTime: number) {
@@ -46,12 +51,20 @@ export class RockSpanwer extends Component {
 
     rock.setPosition(new Vec3(startX, randomY, 0));
     this.node.addChild(rock);
+    rock['currentX'] = startX;
 
+    const endX = -this.scene.width+200
     const distance = this.scene.width;
     const duration = distance / this.gameSpeed;
 
     tween(rock)
-        .to(duration, { position: new Vec3(-this.scene.width+200 , randomY, 0) })
+    .to(duration, {}, {
+        onUpdate: (_, ratio) => {
+            const newX = startX + (endX - startX) * ratio;
+            rock.setPosition(new Vec3(newX, randomY, 0));
+            rock['currentX'] = newX; // ✅ Track updated position
+        }
+    })
         .call(() => {
             rock.destroy();
         })

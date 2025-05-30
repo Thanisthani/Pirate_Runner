@@ -1,6 +1,7 @@
-import { _decorator, Animation, CCInteger, Collider2D, Component, Contact2DType, director, EventTouch, find, IPhysics2DContact, Node, screen, Vec3 } from 'cc';
+import { _decorator, Animation, CCInteger, Collider2D, Component, Contact2DType, director, EventTouch, find, IPhysics2DContact, Node, screen, UITransform, Vec3 } from 'cc';
 import { GameCtrl } from './GameCtrl';
 import { Results } from './Results';
+import { RockSpanwer } from './RockSpawner';
 const { ccclass, property } = _decorator;
 
 @ccclass('Oracle')
@@ -8,6 +9,9 @@ export class Oracle extends Component {
 
     @property({type: CCInteger, tooltip:"Oracle moving distance"})
     public moveDistance: number = 50
+
+    @property({ type: RockSpanwer })
+    public rockSpawner: RockSpanwer;
 
 
     @property({type: Results})
@@ -127,9 +131,49 @@ onDestroy() {
     }
    }
 
-    update(){
-        this.contactWithBird()
+   update(deltaTime: number) {
+    this.contactWithBird();
+
+    const oracleY = this.node.worldPosition.y;
+    const oracleX = this.node.worldPosition.x;
+
+    const siblings = this.node.parent.children;
+    let targetSiblingIndex = this.node.getSiblingIndex(); // Default
+
+    for (let i = 0; i < siblings.length; i++) {
+        const child = siblings[i];
+
+        if (child === this.node) continue;
+        if (!child.name.startsWith("Rock")) continue;
+
+        const rockY = child.worldPosition.y;
+        
+        const rockX = child['currentX'];
+        // 🟡 Only check rocks in front of Oracle (to the right)
+        if (rockX +child.getComponent(UITransform).contentSize.width/2< oracleX) {
+console.log("next")
+            continue;
+        }
+
+        // if(i==0) {
+        //     console.log("first")
+        //     continue}
+        // 🟢 If Oracle is visually in front (higher Y), set below the rock
+
+
+        if (oracleY < rockY) {
+            targetSiblingIndex = Math.max(targetSiblingIndex, child.getSiblingIndex() + 1);
+            break
+        } else {
+            targetSiblingIndex = Math.min(targetSiblingIndex, child.getSiblingIndex() - 1);
+            break
+        }
+
     }
+
+    this.node.setSiblingIndex(targetSiblingIndex);
+}
+
     resetOracle(){
         this.tempLocationOrcale = this.node.getPosition()
         this.tempLocationOrcale.y =0
